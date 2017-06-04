@@ -1,0 +1,7 @@
+---
+- name: collect ip info
+  hosts:
+    - pi
+  tasks:
+    - name: check default ip
+      debug: msg="{{ ansible_eth0.ipv4 }}"

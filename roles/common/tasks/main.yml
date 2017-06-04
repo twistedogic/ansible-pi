@@ -1,0 +1,6 @@
+---
+- name: install unzip
+  apt:
+    name: unzip
+    state: present
+  sudo: yes

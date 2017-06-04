@@ -1,0 +1,6 @@
+---
+- name: install and start consul cluster
+  hosts:
+    - master
+  roles:
+    - { role: consul, sudo: yes }

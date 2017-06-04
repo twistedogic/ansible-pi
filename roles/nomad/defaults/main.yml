@@ -1,0 +1,8 @@
+---
+nomad_version: "0.5.6"
+nomad_install_path: /usr/local/consul
+nomad_dc: pi
+nomad_is_server: no
+nomad_leader_group: baron
+nomad_bootstrap_expect: "{{ groups[master] | length }}"
+nomad_retry_join: ' [{% for host in groups[pi] %}"{{ host }}"{% if not loop.last %}, {% endif %}{% endfor %}]'
