@@ -30,10 +30,11 @@
     - consul
 
 - name: decompress archive
-  command: "unzip /tmp/consul.zip -d {{ consul_install_path }}/{{ consul_version }}/"
-  tags:
-    - consul
-
+  unarchive:
+    src: /tmp/consul.zip
+    dest: "{{ consul_install_path }}/{{ consul_version }}"
+    copy: no
+ 
 - name: link the versioned consul to the local bin
   file:
     src: "{{ consul_install_path }}/{{ consul_version }}/consul"
@@ -84,7 +85,7 @@
   template:
     src: "{{ item.src }}"
     dest: "{{ item.dest }}"
-    mode: u=rw,g=r,o=r
+    mode: 644
   with_items:
     - src: consul.json.j2
       dest: /etc/consul/consul.json

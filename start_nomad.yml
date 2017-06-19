@@ -1,0 +1,6 @@
+---
+- name: install and start nomad cluster
+  hosts:
+    - pi
+  roles:
+    - { role: nomad, sudo: yes }

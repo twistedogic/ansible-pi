@@ -1,6 +1,6 @@
 ---
 - name: install and start consul cluster
   hosts:
-    - master
+    - pi
   roles:
     - { role: consul, sudo: yes }

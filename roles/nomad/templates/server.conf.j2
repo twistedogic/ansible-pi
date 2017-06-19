@@ -9,14 +9,29 @@ enable_debug = true
 advertise {
   # We need to specify our host's IP because we can't
   # advertise 0.0.0.0 to other nodes in our cluster.
+{% if nomad_is_server %}
   http = "{{ ansible_default_ipv4.address }}:4646"
-  rpc = "{{ ansible_default_ipv4.address }}:4647"
   serf = "{{ ansible_default_ipv4.address }}:4648"
+{% endif %}
+  rpc = "{{ ansible_default_ipv4.address }}:4647"
 }
 
+{% if nomad_is_server %}
 server {
   enabled = true
   bootstrap_expect = {{ nomad_bootstrap_expect }}
-  retry_join = {{ nomad_retry_join }}
+  retry_join = [{{ nomad_retry_join }}]
   rejoin_after_leave = true
+}
+{% endif %}
+
+{% if not nomad_is_server %}
+client {
+  enabled = true
+  servers = {{ nomad_retry_join }}
+}
+{% endif %}
+
+consul {
+  address = "127.0.0.1:8500"
 }

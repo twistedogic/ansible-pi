@@ -1,6 +1,6 @@
 ---
 - name: install unzip
-  apt:
-    name: unzip
-    state: present
-  sudo: yes
+  apt: name={{ item }} state=latest update_cache=yes
+  with_items:
+    - unzip
+    - ca-certificates

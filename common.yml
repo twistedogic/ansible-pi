@@ -2,4 +2,5 @@
 - name: install common package
   hosts:
     - pi
-  roles: ["common"]
+  roles: 
+    - { role: common, sudo: yes }

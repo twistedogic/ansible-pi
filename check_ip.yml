@@ -4,4 +4,4 @@
     - pi
   tasks:
     - name: check default ip
-      debug: msg="{{ ansible_eth0.ipv4 }}"
+      debug: msg="{{ansible_default_ipv4.address}}"
